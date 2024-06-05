@@ -14,7 +14,7 @@ const userSchema = z
       .min(8, 'Password must have than 8 characters')
   })
 
-export async function POST( request: { json: () => any; } ) {
+export async function POST( request: { json: () => String } ) {
     try {
         const body = await request.json();
         const { email, username, password } = userSchema.parse(body);
