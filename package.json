@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "node node_modules/next/dist/bin/next start",
+    "lint": "next lint",
+    "postinstall": "npx prisma generate",
+    "prestart": "npm rebuild && node node_modules/prisma/build/index.js migrate deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",
