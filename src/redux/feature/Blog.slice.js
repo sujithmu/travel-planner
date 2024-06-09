@@ -1,20 +1,20 @@
-"use client"
+// "use client"
 
-import { createSlice } from "@reduxjs/toolkit"
-import blogs from '../../Data/Blog.json'
+// import { createSlice } from "@reduxjs/toolkit"
+// import blogs from '../../Data/Blog.json'
 
-const initialState = {
- allBlogs:blogs,
- singleBlog:[]
-}
+// const initialState = {
+//  allBlogs:blogs,
+//  singleBlog:[]
+// }
 
-export const blogSlice = createSlice({
+// export const blogSlice = createSlice({
 
-    name:'blogs',
-    initialState,
-    reducers:{
+//     name:'blogs',
+//     initialState,
+//     reducers:{
 
-    },
+//     },
 
-})
- export default blogSlice.reducer
+// })
+//  export default blogSlice.reducer

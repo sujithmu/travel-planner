@@ -16,9 +16,10 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useToast } from '../ui/use-toast';
-import Loader from "react-loader-spinner"; 
-// import GoogleSignInButton from '../GoogleSignInButton';
+import { useState } from 'react';
+import { ReloadIcon } from '@radix-ui/react-icons';
+import { Icons } from '../ui/Icons';
+import { toast } from "sonner"
 
 const FormSchema = z.object({
   email: z.string().min(1, 'Email is required').email('Invalid email'),
@@ -30,7 +31,7 @@ const FormSchema = z.object({
 
 const SignInForm = () => {
   const router = useRouter();
-  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -40,18 +41,17 @@ const SignInForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    setIsLoading(true);
     const signInData = await signIn('credentials', {
       email: values.email,
       password: values.password,
       redirect: false,
     })
-    if(signInData?.error) {
-      toast({
-        title: "Error",
-        description: "Ooops something went wrong, please try again later",
-        variant: 'destructive'
-      })
+    if (signInData?.error) {
+      setIsLoading(false);
+      toast("Invalid login credentials");
     } else {
+      toast("Logged in successfully");
       router.refresh();
       router.push('/trip-planner');
     }
@@ -92,14 +92,18 @@ const SignInForm = () => {
             )}
           />
         </div>
-        <Button className='w-full mt-6' type='submit'>
+        <Button className='w-full mt-6' type='submit' disabled={isLoading}>
+          {isLoading ? (
+            <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
+          ) : (
+            <Icons.user className='mr-2 h-4 w-4' />
+          )}
           Sign in
         </Button>
       </form>
       <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
         or
       </div>
-      {/* <GoogleSignInButton>Sign in with Google</GoogleSignInButton> */}
       <p className='text-center text-sm text-gray-600 mt-2'>
         If you don&apos;t have an account, please&nbsp;
         <Link className='text-blue-500 hover:underline' href='/sign-up'>

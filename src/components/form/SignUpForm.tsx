@@ -14,9 +14,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-// import GoogleSignInButton from '../GoogleSignInButton';
 import { useRouter } from 'next/navigation';
-import { useToast } from '../ui/use-toast';
+import { useState } from 'react';
+import { ReloadIcon } from '@radix-ui/react-icons';
+import { Icons } from '../ui/Icons';
+import { toast } from "sonner"
 
 const FormSchema = z
   .object({
@@ -35,7 +37,7 @@ const FormSchema = z
 
 const SignUpForm = () => {
   const router = useRouter();
-  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -47,6 +49,7 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    setIsLoading(true);
     const response = await fetch('/api/user',{
       method: 'POST',
       headers: {
@@ -59,15 +62,12 @@ const SignUpForm = () => {
       })
     })
 
-    if(response.ok){
-      router.push('/sign-in')
-    }
-    else {
-      toast({
-        title: "Error",
-        description: "Ooops something went wrong, please try again later",
-        variant: 'destructive'
-      })
+    if (response.ok) {
+      toast("You are now registered");
+      router.push('/sign-in');
+    } else {
+      toast("Registation failed");
+      setIsLoading(false);
     }
   };
 
@@ -88,19 +88,6 @@ const SignUpForm = () => {
               </FormItem>
             )}
           />
-          {/* <FormField
-            control={form.control}
-            name='role'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Role</FormLabel>
-                <FormControl>
-                  <Input placeholder='user or admin only' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
           <FormField
             control={form.control}
             name='email'
@@ -149,14 +136,18 @@ const SignUpForm = () => {
             )}
           />
         </div>
-        <Button className='w-full mt-6' type='submit'>
+        <Button className='w-full mt-6' type='submit' disabled={isLoading}>
+          {isLoading ? (
+            <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
+          ) : (
+            <Icons.user className='mr-2 h-4 w-4' />
+          )}
           Sign up
         </Button>
       </form>
       <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
         or
       </div>
-      {/* <GoogleSignInButton>Sign up with Google</GoogleSignInButton> */}
       <p className='text-center text-sm text-gray-600 mt-2'>
         If you don&apos;t have an account, please&nbsp;
         <Link className='text-blue-500 hover:underline' href='/sign-in'>

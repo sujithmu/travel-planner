@@ -2,14 +2,13 @@
 
 import React from 'react'
 import { useSelector} from "react-redux"
-import LandingPageForm from '../home/subhome/landingPageForm';
 import AiPlanner from './AiPlanner';
 import AiDestination from './AiDestination';
+import LandingPageForm from '../home/subhome/landingPageForm';
 
 function TripPlanner() {
-  
-     const {destination,dateTo,clicked,dateFrom} = useSelector((state:any)=>state.formData)
-        const formData = !destination || !dateTo || !dateFrom || !clicked;
+    const { destination, dateTo, clicked, dateFrom } = useSelector((state: any) => state.formData)
+    const formData = !destination || !dateTo || !dateFrom || !clicked;
     return (
         <div className="w-full flex flex-col justify-center items-center">
             <div className='w-11/12 flex flex-col my-5'>

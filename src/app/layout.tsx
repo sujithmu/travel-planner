@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Provider from "@/components/Provider";
-import NextTopLoader from 'nextjs-toploader';
 import {Providers} from '@/redux/Provider.redux';
-import Header from "@/components/shared/header/Header";
-import { Toaster } from "@/components/ui/sonner"
-import { useSession } from "next-auth/react";
-
-// const { data: session } = useSession();
-// const user = session?.user.email?.substring(0, session.user.email.indexOf("@"));
-// console.log("user",user)
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,23 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          {/* <NextTopLoader
-            color="orange"
-            initialPosition={0.08}
-            crawlSpeed={200}
-            height={3}
-            crawl={true}
-            showSpinner={true}
-            easing="ease"
-            speed={200}
-            shadow="0 0 10px #2299DD,0 0 5px #2299DD" /> */}
-          {/* <Provider> */}
-                {/* <Navbar /> */}
-                <Toaster />
-                {/* <Header data={user}/> */}
-                <Header />
-                {children}
-          {/* </Provider> */}
+          {children}
         </Providers>
       </body>
     </html>
