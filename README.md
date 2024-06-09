@@ -6,16 +6,27 @@ https://yellow-tree-01351181e.5.azurestaticapps.net
 
 ## Technologies Used
 **React**: React Js 18.
+
 **Next Js**: Next.js 14.
+
 **TypeScript**: A strict syntactical superset of JavaScript, adding optional static typing.
+
 **Jest**: Jest is a JavaScript testing framework designed for unit testing.
+
 **NextAuth.js**: NextAuth.js is a complete open-source authentication solution for Next.js applications.
+
 **Tailwindcss**: Tailwind CSS is an open-source CSS framework.
+
 **Backend**: Next Js
+
 **Database**: PostgreSQL, database deployed in supabase
+
 **Frontend**: React Js, Next Js
+
 **API**: RAPID API's
+
 **ORM**: Prisma
+
 **Cloud**: Deployed using Azure Static Web App, automated using GitHub Actions.
 
 ## Open source APIs Used
