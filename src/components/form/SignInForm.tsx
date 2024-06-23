@@ -19,7 +19,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { Icons } from '../ui/Icons';
-import { toast } from "sonner"
+import { toast } from "sonner";
+import { Toast } from "flowbite-react";
 
 const FormSchema = z.object({
   email: z.string().min(1, 'Email is required').email('Invalid email'),
@@ -40,6 +41,7 @@ const SignInForm = () => {
     },
   });
 
+  const [error, setError] = useState("");
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     setIsLoading(true);
     const signInData = await signIn('credentials', {
@@ -49,6 +51,7 @@ const SignInForm = () => {
     })
     if (signInData?.error) {
       setIsLoading(false);
+      setError("Invalid login credentials!");
       toast("Invalid login credentials");
     } else {
       toast("Logged in successfully");
@@ -100,6 +103,16 @@ const SignInForm = () => {
           )}
           Sign in
         </Button>
+        {error && (
+          <Toast className="">
+          {/* <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg  text-orange-500  ">
+            <Image width={50} height={50} src={warning} alt="warning" />
+          </div> */}
+          <div className="ml-3 text-sm font-normal">{error}</div>
+          <Toast.Toggle />
+        </Toast>
+        )}
+        
       </form>
       <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
         or
