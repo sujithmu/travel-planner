@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { useSelector} from "react-redux"
+import { useSelector } from "react-redux"
 import AiPlanner from './AiPlanner';
 import AiDestination from './AiDestination';
 import LandingPageForm from '../home/subhome/landingPageForm';
@@ -22,6 +22,12 @@ function TripPlanner() {
                         </div>
                         :
                         <>
+                            <div>
+                                <h1 className='text-3xl md:text-5xl font-bold text-center mt-9 '>Plan your next trip</h1>
+                                <div className="relative mt-24">
+                                    <LandingPageForm />
+                                </div>
+                            </div>
                             <AiDestination />
                             <AiPlanner />
                         </>

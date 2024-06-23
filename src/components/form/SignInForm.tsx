@@ -105,9 +105,6 @@ const SignInForm = () => {
         </Button>
         {error && (
           <Toast className="">
-          {/* <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg  text-orange-500  ">
-            <Image width={50} height={50} src={warning} alt="warning" />
-          </div> */}
           <div className="ml-3 text-sm font-normal">{error}</div>
           <Toast.Toggle />
         </Toast>

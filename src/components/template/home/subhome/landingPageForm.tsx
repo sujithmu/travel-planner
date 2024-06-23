@@ -49,10 +49,7 @@ export default function LandingPageForm(props: any) {
             <button type='submit' className="flex flex-row ml-4
 gap-x-1
 sm:ml-0 capitalize items-center bg-[#43B97F] p-2 text-white rounded-lg  justify-center">
-              <IoSearch size={23} />
-              {loading ? "Planning...."
-                : 'Plan your trip'
-              }
+              <IoSearch size={23} />Plan your trip
             </button>
           </div>
         </form>
