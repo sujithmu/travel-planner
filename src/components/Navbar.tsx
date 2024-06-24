@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
                       onClick={(e) => {
                           e.preventDefault();
                           signOut();
-                          router.push(process.env.__NEXTAUTH+'/sign-in')
+                          router.push('/sign-in')
                       }}
                   >
                       Sign out
