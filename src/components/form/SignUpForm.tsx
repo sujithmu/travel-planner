@@ -18,7 +18,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { Icons } from '../ui/Icons';
-import { toast } from "sonner"
+import { toast } from "sonner";
+import { Toast } from "flowbite-react";
 
 const FormSchema = z
   .object({
@@ -48,6 +49,7 @@ const SignUpForm = () => {
     },
   });
 
+  const [error, setError] = useState("");
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     setIsLoading(true);
     const response = await fetch('/api/user',{
@@ -66,6 +68,7 @@ const SignUpForm = () => {
       toast("You are now registered");
       router.push('/sign-in');
     } else {
+      setError("Registation failed");
       toast("Registation failed");
       setIsLoading(false);
     }
@@ -82,7 +85,7 @@ const SignUpForm = () => {
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input placeholder='johndoe' {...field} />
+                  <Input placeholder='Philip' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -144,6 +147,12 @@ const SignUpForm = () => {
           )}
           Sign up
         </Button>
+        {error && (
+          <Toast className="">
+            <div className="ml-3 text-sm font-normal">{error}</div>
+            <Toast.Toggle />
+          </Toast>
+        )}
       </form>
       <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
         or
