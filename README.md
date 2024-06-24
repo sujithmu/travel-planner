@@ -5,7 +5,7 @@ This project is a responsive web application built with React^18 and Next Js^14 
 https://yellow-tree-01351181e.5.azurestaticapps.net
 
 ## Project Architecture
-<img width="1187" alt="Screenshot 2024-06-23 at 15 38 14" src="https://github.com/sujithmu/travel-planner/assets/41791057/369e9e8d-2d52-4f57-8a31-b489289a5123">
+<img width="952" alt="Screenshot 2024-06-24 at 13 08 22" src="https://github.com/sujithmu/travel-planner/assets/41791057/861bf78c-5646-4f0c-9b3e-edeb14b8b7d9">
 
 ## Technologies Used
 **React**: React Js 18.
